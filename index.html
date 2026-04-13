@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de tarefas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <header class="bg-primary text-center py-4">
+        <div class="container">
+            <h1 class="text-white">Gestor de Tarefas</h1>
+        </div>
+    </header>
+    <main class="container mt-4">
+        <section class="mb-4">
+            <input type="text" id="tarefa" class="form-control" placeholder="Digite uma nova tarefa">
+            <a href="#" id="adicionar" class="btn btn-primary mt-4">Adicionar Tarefa</a>
+            <ul id="lista-tarefas" class="list-group mt-4"></ul>
+        </section>
+    </main>
+    <script>
+        document.getElementById('adicionar').addEventListener('click', function() {
+            const tarefaInput = document.getElementById('tarefa');
+            if (tarefaInput.value.trim() !== '') {
+                const li = document.createElement('li');
+                li.className = 'list-group-item d-flex justify-content-between align-items-center';
+                li.textContent = tarefaInput.value;
+
+                const concluirBtn = document.createElement('button');
+                concluirBtn.className = 'btn btn-success btn-sm';
+                concluirBtn.textContent = 'Concluir';
+                concluirBtn.addEventListener('click', function() {
+                    li.style.textDecoration = 'line-through';
+                });
+
+
+                const excluirBtn = document.createElement('button');
+                excluirBtn.className = 'btn btn-danger btn-sm';
+                excluirBtn.textContent = 'Excluir';
+                excluirBtn.addEventListener('click', function() {
+                    li.remove();
+                });
+
+                li.appendChild(concluirBtn);
+                li.appendChild(excluirBtn);
+                document.getElementById('lista-tarefas').appendChild(li);
+                tarefaInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
